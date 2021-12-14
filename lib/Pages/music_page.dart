@@ -10,6 +10,9 @@ class MusicPage extends StatefulWidget {
 }
 
 class _MusicPageState extends State<MusicPage> {
+  bool _switchValue = true;
+  double _value = 28;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,6 +23,24 @@ class _MusicPageState extends State<MusicPage> {
           centerTitle: true,
           backgroundColor: kSpotifyGreenColor,
           title: kAppbarText,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: kSpotifyBlackColorDarker,
+          selectedItemColor: kSpotifyGreenColor,
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Home'),
+                backgroundColor: kSpotifyGreenColor),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              title: Text('Search'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.headset),
+              title: Text('My Musics'),
+            ),
+          ],
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -33,7 +54,7 @@ class _MusicPageState extends State<MusicPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20, 100, 20, 10),
+                  padding: EdgeInsets.fromLTRB(10, 40, 20, 10),
                   child: Image.asset(
                     'lib/assets/images/mozart.jpg',
                     scale: 2.0,
@@ -62,6 +83,114 @@ class _MusicPageState extends State<MusicPage> {
                         color: Colors.white,
                       )),
                 ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                  child: Text(
+                    'BY SPOTIFY - 379.458 FOLLOWERS',
+                    style: TextStyle(fontSize: 9.0),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 7.0,
+                        height: 7.0,
+                        child: FloatingActionButton.small(
+                          onPressed: () {},
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5.0,
+                      ),
+                      Container(
+                        width: 7.0,
+                        height: 7.0,
+                        child: FloatingActionButton.small(
+                          onPressed: () {},
+                          backgroundColor: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 40.0,
+                  width: 145.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: kSpotifyGreenColor,
+                  ),
+                  child: Center(
+                    child: Text('SHUFFLE PLAY'),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15, 10, 5, 0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text('Download'),
+                      ),
+                      Transform.scale(
+                        scale: 0.6,
+                        child: Expanded(
+                          child: CupertinoSwitch(
+                            value: _switchValue,
+                            onChanged: (value) {
+                              setState(() {
+                                _switchValue = value;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Slider(
+                  activeColor: kSpotifyGreenColor,
+                  inactiveColor: Colors.grey,
+                  min: 1,
+                  max: 100,
+                  value: _value,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        _value = value;
+                      },
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 120,
+                      ),
+                      Icon(
+                        Icons.pause,
+                        size: 40,
+                      ),
+                      SizedBox(
+                        width: 120,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
